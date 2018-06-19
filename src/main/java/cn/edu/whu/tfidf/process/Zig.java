@@ -224,15 +224,18 @@ public class Zig implements iSelect {
                 double qLap = qsuf[i + 1], rLap = cpair.rLap;
                 double minsuf = Math.sqrt(rLap * qLap);
 
-                if (cpair.accu + minsuf < cpair.len * lenq * threshold) {
-                    it.remove();
-                } else {
-                    for (int j = 0; j <= i; j++) {
-                        if (cpair.tf[j] > tfmax[j]) {
-                            tfmax[j] = cpair.tf[j];
-                        }
-                    }
-                }
+				if (cpair.accu + minsuf < cpair.len * lenq * threshold) {
+					it.remove();
+				} else if (cpair.accu >= cpair.len * lenq * threshold) {
+					resultSet.add(entry.getKey());
+					it.remove();
+				} else {
+					for (int j = 0; j <= i; j++) {
+						if (cpair.tf[j] > tfmax[j]) {
+							tfmax[j] = cpair.tf[j];
+						}
+					}
+				}
             }
             boolean changed = true;
             while (changed) {
