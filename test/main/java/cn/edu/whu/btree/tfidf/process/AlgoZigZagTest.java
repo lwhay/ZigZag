@@ -68,9 +68,9 @@ public class AlgoZigZagTest {
 		((TfidfPref) select).setCandiSize(0);
 		begin = System.currentTimeMillis();
 		for (int i = 0; i < findTimes; i++) {
-			System.out.print("query: ");
-			queryList.get(i).forEach(token -> System.out.print(token + " "));
-			System.out.println();
+            //System.out.print("query: ");
+            //queryList.get(i).forEach(token -> System.out.print(token + " "));
+            //System.out.println();
 			resultList = select.find(queryList.get(i), threshold);
 			resultCount += resultList.size();
 			// System.out.println(resultList.size());
