@@ -51,6 +51,8 @@ public class TfIdfDataReader implements iDataReader {
             //            tokenTfmaxToRecordListMap = new HashMap<Integer, List<Integer>>();
             //            tfmaxToTokenListMap = new HashMap<Short, List<Integer>>();
             int lenSum = 0, maxlen = 0;
+            BufferedWriter bwsc = new BufferedWriter(new FileWriter("record.str"));
+            BufferedWriter bwic = new BufferedWriter(new FileWriter("record.int"));
             while ((line = reader.readLine()) != null) {
                 recordMap.put(recordCount, line);
                 String[] token = tokenizer.tokenize(line);
@@ -59,6 +61,8 @@ public class TfIdfDataReader implements iDataReader {
                 if (maxlen < token.length) {
                     maxlen = token.length;
                 }
+                String strrec = "";
+                String intrec = "";
                 for (int i = 0; i < token.length; i++) {
                     if (tfMap.containsKey(token[i])) {
                         tfMap.put(token[i], (short) (tfMap.get(token[i]) + 1));
@@ -75,9 +79,15 @@ public class TfIdfDataReader implements iDataReader {
                             freqMap.put(tokenToIdMap.get(token[i]), freqMap.get(tokenToIdMap.get(token[i])) + 1);
                         }
                     }
+                    strrec += token[i];
+                    strrec += " ";
+                    intrec += tokenToIdMap.get(token[i]);
+                    intrec += " ";
                     tfMap.put(token[i], (short) 1);
                     strlist.add(tokenToIdMap.get(token[i]));
                 }
+                bwsc.write(strrec + "\n");
+                bwic.write(intrec + "\n");
                 List<TfTokenPair> record = strlist.stream()
                         .map(elem -> new TfTokenPair(elem, tfMap.get(idToTokenMap.get(elem))))
                         .collect(Collectors.toList());
@@ -112,6 +122,8 @@ public class TfIdfDataReader implements iDataReader {
                 }
 
             }
+            bwsc.close();
+            bwic.close();
             //            System.out.println("maxlen " + maxlen);
             avglen = lenSum * 1.0 / recordCount;
             //            tfmaxMap.forEach((k, v) -> {
