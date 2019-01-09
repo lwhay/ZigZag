@@ -15,3 +15,5 @@ java -Xmx1g -jar AlgoZagTest.jar ./index ./query-stanford.txt 0.9 0 0 1 0
 java -Xmx1g -jar AlgoZagPlusTest.jar ./index ./query-stanford.txt 0.9 0 0 1 0
 ### ZigZag
 java -Xmx1g -jar AlgoZigZagTest.jar ./index ./query-stanford.txt 0.9 0 0 1 0
+## Dataset
+We have uploaded three datasets, pubmed title, twitter text, stanford quotes, onto Googledrive, which can be obtained from https://drive.google.com/drive/folders/1XyqcpqAyLlPfnX3d8N9wSEDQLlj_oXAK.
